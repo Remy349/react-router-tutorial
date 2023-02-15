@@ -4,6 +4,7 @@ import { getContact } from '../contacts'
 
 export async function loader ({ params }) {
   const contact = await getContact(params.contactId)
+  console.log(contact)
   return { contact }
 }
 
@@ -32,7 +33,11 @@ const Contact = () => {
 
         {contact.twitter && (
           <p>
-            <a target='_blank' href={`https://twitter.com/${contact.twitter}`} rel='noreferrer'>
+            <a
+              target='_blank'
+              href={`https://twitter.com/${contact.twitter}`}
+              rel='noreferrer'
+            >
               {contact.twitter}
             </a>
           </p>
@@ -48,7 +53,11 @@ const Contact = () => {
             method='post'
             action='destroy'
             onSubmit={(event) => {
-              if (!window.confirm('Please confirm you want to delete this record.')) {
+              if (
+                !window.confirm(
+                  'Please confirm you want to delete this record.'
+                )
+              ) {
                 event.preventDefault()
               }
             }}
